@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "steeck",
+  "main": "server.js",
+  "dependencies": {
+    "aws": "0.0.3-2",
+    "aws-sdk": "^2.325.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-mysql": "0.0.1",
+    "fs": "0.0.1-security",
+    "multer": "^1.4.0",
+    "mysql": "^2.16.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  },
+  "scripts": {
+    "test": "start",
+    "start": "nodemon server.js"
+  },
+  "author": "steeck",
+  "license": "ISC"
+}
