@@ -7,7 +7,8 @@ const path = require('path');
 const mysql = require('mysql');
 const  cors = require('cors');
 
-const { Test, Posts } = require('../sequelize.js')
+// const { Test, Posts } = require('../sequelize.js')
+var models  = require('../models');
 
 const app = express()
 app.use(bodyParser.json())
@@ -29,18 +30,22 @@ var s3 = new AWS.S3();
 //     .then(user => res.json(user))
 // })
 
-app.get('/g/test', (req, res) => {
-    Test.findAll().then(test => res.json(test))
+app.get('/delegations', (req, res) => {
+    models.delegations.findAll().then(test => res.json(test))
+})
+
+app.get('/test', (req, res) => {
+    models.tests.findAll().then(test => res.json(test))
 })
 
 app.get('/get/posts', (req, res) => {
-    Posts.findAll().then(test => res.json(test))
+    models.posts.findAll().then(test => res.json(test))
 })
 
 app.post('/insert', function(req, res) {
 
   console.log("objsasd", req.body);
-  Posts.create({
+  models.posts.create({
     author: 'danielaasdf',
     permlink: 'testinglink',
     contents: req.body

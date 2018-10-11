@@ -8,8 +8,7 @@ module.exports = (sequelize, type) => {
     type: type.INTEGER,
     from: type.STRING,
     to: type.STRING,
-    amount: type.DOUBLE,
-    created_at: type.DATETIME
+    amount: type.DOUBLE
   })
 
   return Delegation
