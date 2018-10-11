@@ -33,20 +33,17 @@ app.get('/g/test', (req, res) => {
     Test.findAll().then(test => res.json(test))
 })
 
-app.get('/g/posts', (req, res) => {
+app.get('/get/posts', (req, res) => {
     Posts.findAll().then(test => res.json(test))
 })
 
 app.post('/insert', function(req, res) {
-  let obj = {
-    url: req.body.file,
-    text: req.body.text
-  }
-  console.log("objsasd", obj);
+
+  console.log("objsasd", req.body);
   Posts.create({
     author: 'danielaasdf',
     permlink: 'testinglink',
-    contents: obj
+    contents: req.body
   }).then(function(data) {
       res.status(200);
       res.json(data.get({plain: true}));
@@ -55,7 +52,6 @@ app.post('/insert', function(req, res) {
       res.json({error:error, stackError:error.stack});
   });
 
-  // res.json(obj);
 })
 
 app.post('/create', upload.single('file'), function(req, res) {
