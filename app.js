@@ -12,8 +12,8 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
 function configApp() {
-  app.use(bodyParser.json({type: 'application/json'}));
-  app.use(bodyParser.urlencoded({extended: false}));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded());
   app.use(cors());
   // app.use(fetcher());
   // app.use(cookieParser());
