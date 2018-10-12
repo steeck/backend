@@ -7,7 +7,9 @@
     "aws": "0.0.3-2",
     "aws-sdk": "^2.325.0",
     "body-parser": "^1.18.3",
+    "consolidate": "^0.15.1",
     "cors": "^2.8.4",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-mysql": "0.0.1",
     "fs": "0.0.1-security",
@@ -16,14 +18,15 @@
     "mysql2": "^1.6.1",
     "path": "^0.12.7",
     "sequelize": "^4.39.0",
-    "sequelize-cli": "^4.1.1"
+    "sequelize-cli": "^4.1.1",
+    "underscore.string": "^3.3.5"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
   },
   "scripts": {
     "test": "start",
-    "start": "nodemon exproutes/router2.js"
+    "start": "nodemon app.js"
   },
   "author": "steeck",
   "license": "ISC"

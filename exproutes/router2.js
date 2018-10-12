@@ -5,10 +5,10 @@ const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql');
-const  cors = require('cors');
+const cors = require('cors');
 
 // const { Test, Posts } = require('../sequelize.js')
-var models  = require('../models');
+var models = require('../models');
 
 const app = express()
 app.use(bodyParser.json())

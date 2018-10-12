@@ -3,19 +3,23 @@
 var models = require('./index');
 
 module.exports = (sequelize, DataTypes) => {
-  const Test = sequelize.define('Test', {
+  const Delegation = sequelize.define('Delegation', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    name: DataTypes.STRING
+    type: DataTypes.INTEGER,
+    from: DataTypes.STRING,
+    to: DataTypes.STRING,
+    amount: DataTypes.DOUBLE,
+    created_at: DataTypes.DATE
   }, {
-    tableName: 'tests',
+    tableName: 'delegations',
     freezeTableName: true,
     underscored: true,
     timestamps: false
   })
 
-  return Test
+  return Delegation
 }
