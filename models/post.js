@@ -13,10 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     permlink: DataTypes.STRING, //article link
     contents: DataTypes.JSON //contents  {title: {url:, text:}, {contents: {url, text}, {...} }}
   }, {
-    tableName: 'posts',
-    freezeTableName: true,
-    underscored: true,
-    timestamps: false
+    tableName: 'posts'
   })
 
   return Post

@@ -11,10 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: DataTypes.STRING
   }, {
-    tableName: 'tests',
-    freezeTableName: true,
-    underscored: true,
-    timestamps: false
+    tableName: 'tests'
   })
 
   return Test

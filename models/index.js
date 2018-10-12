@@ -10,6 +10,17 @@ var sequelize = new Sequelize("steeck", "steeck", "steeck2018!", {
   host: 'steeck.c9mlkeoxgavg.ap-northeast-2.rds.amazonaws.com',
   dialect: 'mysql',
   port: 3306,
+  operatorsAliases: false,
+  define: {
+    underscored: true,
+    freezeTableName: true,
+    timestamps: true,
+    updatedAt: false,
+    charset: 'utf8',
+    dialectOptions: {
+      collate: 'utf8_general_ci'
+    }
+  },
   pool: {
     max: 10,
     min: 0,

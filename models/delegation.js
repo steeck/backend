@@ -12,13 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.INTEGER,
     from: DataTypes.STRING,
     to: DataTypes.STRING,
-    amount: DataTypes.DOUBLE,
-    created_at: DataTypes.DATE
+    amount: DataTypes.DOUBLE
   }, {
-    tableName: 'delegations',
-    freezeTableName: true,
-    underscored: true,
-    timestamps: false
+    tableName: 'delegations'
   })
 
   return Delegation
