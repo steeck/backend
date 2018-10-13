@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const AWS = require('aws-sdk');
 const fs = require('fs');
+const path = require('path');
 
 var router = express.Router();
 var upload = multer({ dest: './uploads/'});
