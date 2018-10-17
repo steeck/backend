@@ -1,5 +1,5 @@
-const delegations = require('./delegations');
-const posts = require('./posts');
+const delegations = require('./delegationRouter');
+const posts = require('./postRouter');
 const test = require('./test');
 const fileupload = require('./fileupload');
 
