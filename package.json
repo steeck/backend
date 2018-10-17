@@ -19,6 +19,7 @@
     "path": "^0.12.7",
     "sequelize": "^4.39.0",
     "sequelize-cli": "^4.1.1",
+    "steem": "^0.7.2",
     "underscore.string": "^3.3.5"
   },
   "devDependencies": {

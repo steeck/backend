@@ -9,10 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     from: DataTypes.STRING,
     to: DataTypes.STRING,
-    amount: DataTypes.DOUBLE
+    sp: DataTypes.DOUBLE,
+    vests: DataTypes.DOUBLE
   }, {
     tableName: 'delegations'
   })
