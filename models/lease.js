@@ -3,7 +3,7 @@
 var models = require('./index');
 
 module.exports = (sequelize, DataTypes) => {
-  const Delegation = sequelize.define('Delegation', {
+  const Lease = sequelize.define('Lease', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     vests: DataTypes.DOUBLE,
     weeks: DataTypes.INTEGER
   }, {
-    tableName: 'delegations'
+    tableName: 'lease'
   })
 
-  return Delegation
+  return Lease
 }
