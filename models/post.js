@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     author: DataTypes.STRING,
     permlink: DataTypes.STRING, //article link
-    contents: DataTypes.JSON //contents  {title: {url:, text:}, {contents: {url, text}, {...} }}
+    contents: DataTypes.JSON, //contents  {title: {url:, text:}, {contents: {url, text}, {...} }}
+    json_metadata: DataTypes.JSON //metadata
   }, {
     tableName: 'posts'
   })

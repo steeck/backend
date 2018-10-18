@@ -10,10 +10,12 @@ router.route('/')
     // @TODO validate form data
     let hash = 'abcd1234'; // this is a sample hash, should be implemented as a helper function
     let permlink = 'steeck-hot' + hash;
+    console.log('');
     models.Post.create({
       author: req.body.author,
       permlink: permlink,
       contents: req.body.contents,
+      json_metadata: req.body.json_metadata
     }).then(function(data) {
       res.status(200);
       res.json(data.get({plain: true}));
