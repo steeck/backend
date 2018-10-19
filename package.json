@@ -9,6 +9,7 @@
     "body-parser": "^1.18.3",
     "consolidate": "^0.15.1",
     "cors": "^2.8.4",
+    "dotenv": "^6.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-mysql": "0.0.1",
