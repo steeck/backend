@@ -4,16 +4,17 @@ const bodyParser = require('body-parser');
 // const cookieParser = require('cookie-parser');
 // const fetcher = require('express-param');
 const cors = require('cors');
-const models = require('./models');
+const models = require('./models')
 const app = express();
 const uniqid = require('uniqid')
-
+require('dotenv').config()
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
 function configApp() {
+  // console.log('process', process.env.DB_USERNAME);
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cors());
