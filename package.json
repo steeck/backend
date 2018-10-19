@@ -24,7 +24,8 @@
     "underscore.string": "^3.3.5"
   },
   "devDependencies": {
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "uniqid": "^5.0.3"
   },
   "scripts": {
     "test": "start",

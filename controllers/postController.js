@@ -1,8 +1,9 @@
 const steem = require('steem');
 const { Post } = require('../models');
+const uniqid = require('uniqid')
 
 exports.create = function (req, res) {
-  let hash = 'abc123';
+  let hash = uniqid();
   let permlink = 'steeck-hot' + hash;
   Post.create({
     author: req.body.author,
