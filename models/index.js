@@ -4,12 +4,14 @@ var fs = require('fs');
 var path = require('path');
 var Sequelize = require('sequelize');
 var basename = path.basename(__filename);
+require('dotenv').config()
+
 // var env = process.env.NODE_ENV || 'development';
 // var config = require(__dirname + '/../config/config.js')[env];
-var sequelize = new Sequelize("steeck", "steeck", "steeck2018!", {
-  host: 'steeck.c9mlkeoxgavg.ap-northeast-2.rds.amazonaws.com',
-  dialect: 'mysql',
-  port: 3306,
+var sequelize = new Sequelize(process.env.SQL_DB, process.env.SQL_USERNAME, process.env.SQL_PASSWORD, {
+  host: process.env.SQL_HOST,
+  dialect: process.env.SQL_DIALECT,
+  port: process.env.SQL_PORT,
   operatorsAliases: false,
   define: {
     underscored: true,

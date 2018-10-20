@@ -21,6 +21,8 @@
     "sequelize": "^4.39.0",
     "sequelize-cli": "^4.1.1",
     "steem": "^0.7.2",
+    "steemconnect": "^2.0.1",
+    "steemjs": "^1.0.4",
     "underscore.string": "^3.3.5"
   },
   "devDependencies": {
@@ -29,7 +31,8 @@
   },
   "scripts": {
     "test": "start",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "build": "NODE_ENV=production nodemon app.js"
   },
   "author": "steeck",
   "license": "ISC"

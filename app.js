@@ -27,8 +27,8 @@ function configApp() {
 
 configApp();
 
-app.listen(4000, function() {
-  console.log('Server is listening on port 4000');
+app.listen(process.env.PORT, function() {
+  console.log('Server is listening on port ' + process.env.PORT);
 });
 
 module.exports = app;

@@ -8,8 +8,8 @@ var router = express.Router();
 var upload = multer({ dest: './uploads/'});
 
 AWS.config.update({
-    accessKeyId: "AKIAJFY5N6PPEP7MVIPQ",
-    secretAccessKey: "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"
+    accessKeyId: process.env.AWS_ACCESSKEY,
+    secretAccessKey: process.env.AWS_SECRETKEY
   });
 
 var s3 = new AWS.S3();
