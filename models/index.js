@@ -25,10 +25,10 @@ var sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, proc
     }
   },
   pool: {
-    max: 10,
+    max: 200,
     min: 0,
-    acquire: 30,
-    idle: 10
+    acquire: 20000,
+    idle: 20000
   }
 })
 var db = {};
