@@ -8,10 +8,11 @@ require('dotenv').config()
 
 // var env = process.env.NODE_ENV || 'development';
 // var config = require(__dirname + '/../config/config.js')[env];
-var sequelize = new Sequelize(process.env.SQL_DB, process.env.SQL_USERNAME, process.env.SQL_PASSWORD, {
-  host: process.env.SQL_HOST,
-  dialect: process.env.SQL_DIALECT,
-  port: process.env.SQL_PORT,
+
+var sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: process.env.DB_DIALECT,
+  port: process.env.DB_PORT,
   operatorsAliases: false,
   define: {
     underscored: true,
