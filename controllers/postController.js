@@ -12,9 +12,11 @@ exports.create = function (req, res) {
     json_metadata: req.body.json_metadata
   }).then(function(data) {
     res.status(200);
+    console.log('success', data);
     res.json(data.get({plain: true}));
   }).catch(function(error) {
     res.status(500);
+    console.log('err', error);
     res.json({error: error, stackError: error.stack});
   });
 };
