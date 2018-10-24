@@ -2,9 +2,15 @@ const steem = require('steem');
 const { Delegation } = require('../models');
 
 exports.list = function (req, res) {
-  console.log(req.params.username);
-  res.json(req.params.username);
-  res.send('NOT IMPLEMENTED: Author list');
+  // console.log(req.params.username);
+  Delegation.findAll({
+    where: { from: req.params.username },
+    order: [
+      ['id', 'desc']
+    ]
+  }).then(result => {
+    res.json(result);
+  })
 };
 
 exports.create = async function (req, res) {

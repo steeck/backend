@@ -1,6 +1,18 @@
 const steem = require('steem');
 const { Lease } = require('../models');
 
+exports.list = function (req, res) {
+  // console.log(req.params.username);
+  Lease.findAll({
+    where: { to: req.params.username },
+    order: [
+      ['id', 'desc']
+    ]
+  }).then(result => {
+    res.json(result);
+  })
+};
+
 exports.create = function (req, res) {
   Lease.create({
     type: req.body.type,

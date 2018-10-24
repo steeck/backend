@@ -1,6 +1,17 @@
 const steem = require('steem');
 const { VotingRequests } = require('../models');
 
+exports.list = function (req, res) {
+  VotingRequests.findAll({
+    where: { username: req.params.username },
+    order: [
+      ['id', 'desc']
+    ]
+  }).then(result => {
+    res.json(result);
+  })
+};
+
 exports.create = function (req, res) {
   VotingRequests.create({
     username: req.body.username,
