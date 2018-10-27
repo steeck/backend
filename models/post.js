@@ -2,20 +2,24 @@
 
 var models = require('./index');
 
-module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define('Post', {
+module.exports = (sequelize, Sequelize) => {
+  return sequelize.define('Post', {
     id: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    author: DataTypes.STRING,
-    permlink: DataTypes.STRING, //article link
-    contents: DataTypes.JSON, //contents  {title: {url:, text:}, {contents: {url, text}, {...} }}
-    json_metadata: DataTypes.JSON //metadata
+    category: Sequelize.STRING,
+    rate: Sequelize.INTEGER,
+    author: Sequelize.STRING,
+    permlink: Sequelize.STRING,
+    title: Sequelize.STRING,
+    thumbnail: Sequelize.STRING,
+    contents: Sequelize.JSON,
+    json_metadata: Sequelize.JSON,
+    active_votes: Sequelize.INTEGER,
+    children: Sequelize.INTEGER
   }, {
     tableName: 'posts'
   })
-
-  return Post
 }
