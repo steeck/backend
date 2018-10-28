@@ -16,6 +16,7 @@ module.exports = (sequelize, Sequelize) => {
     title: Sequelize.STRING,
     thumbnail: Sequelize.STRING,
     contents: Sequelize.JSON,
+    layout: Sequelize.JSON,
     json_metadata: Sequelize.JSON,
     active_votes: Sequelize.JSON,
     net_votes: Sequelize.INTEGER,
