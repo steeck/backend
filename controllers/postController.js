@@ -55,6 +55,28 @@ exports.getWeekly = function (req, res) {
   })
 }
 
+exports.getPost = async function (req, res) {
+  Post.find({
+    where: { id: req.params.id }
+  }).then(async result => {
+    // const steemRoute = '/steeck/@' + result.author + '/' + result.permlink
+    const steem = await getSteemContent(result.author, result.permlink)
+    let data = {
+      data: result,
+      steem: steem
+    }
+    res.json(data)
+  })
+}
+
+function getSteemContent(author, permlink) {
+  return new Promise(function (resolve, reject) {
+    steem.api.getContent(author, permlink, function (err, res) {
+      return err ? reject(err) : resolve(res);
+    })
+  })
+}
+
 exports.create = function (req, res) {
   let hash = uniqid()
   let permlink = 'steeck-' + hash
