@@ -20,7 +20,7 @@ exports.create = function (req, res) {
     to: req.body.to,
     sp: req.body.sp,
     vests: req.body.vests,
-    weeks: req.body.weeks,
+    days: req.body.days,
   }).then(function(data) {
     res.status(200);
     res.json(data.get({plain: true}));

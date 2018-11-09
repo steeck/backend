@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     to: DataTypes.STRING,
     sp: DataTypes.DOUBLE,
     vests: DataTypes.DOUBLE,
-    weeks: DataTypes.INTEGER
+    days: DataTypes.INTEGER
   }, {
     tableName: 'lease'
   })
