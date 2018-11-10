@@ -8,5 +8,6 @@ router.get('/new', postController.getNew);
 router.get('/weekly', postController.getWeekly);
 router.get('/:id', postController.getPost);
 router.post('/', postController.create);
+router.get('/search/:q', postController.search);
 
 module.exports = router;
