@@ -2,12 +2,12 @@ const steem = require('steem')
 const { Post, Steecky } = require('../models')
 const uniqid = require('uniqid')
 const moment = require('moment')
-const { Op } = require('sequelize')
+const {Op} = require('sequelize')
 
 exports.getCategory = function (req, res) {
   // console.log(req.params.username)
   Post.findAll({
-    where: { category: req.params.category },
+    where: {category: req.params.category},
     order: [
       ['id', 'desc']
     ]
@@ -90,7 +90,7 @@ exports.getPayout = function (req, res) {
 
 exports.getPost = async function (req, res) {
   Post.find({
-    where: { id: req.params.id }
+    where: {id: req.params.id}
   }).then(async result => {
     // const steemRoute = '/steeck/@' + result.author + '/' + result.permlink
     const steem = await getSteemContent(result.author, result.permlink)
@@ -102,10 +102,10 @@ exports.getPost = async function (req, res) {
   })
 }
 
-function getSteemContent(author, permlink) {
+function getSteemContent (author, permlink) {
   return new Promise(function (resolve, reject) {
     steem.api.getContent(author, permlink, function (err, res) {
-      return err ? reject(err) : resolve(res);
+      return err ? reject(err) : resolve(res)
     })
   })
 }
@@ -132,7 +132,7 @@ exports.create = function (req, res) {
 
     res.status(201)
     res.json(data.get({plain: true}))
-  }).catch(function(error) {
+  }).catch(function (error) {
     res.status(500)
     console.log('err', error)
     res.json({error: error, stackError: error.stack})
@@ -144,13 +144,46 @@ exports.delete = function (req, res) {
   console.log('permlink del', permlink)
   Post.destroy({
     where: {
-      permlink:permlink
+      permlink: permlink
     }
-  }).then(function(data) {
+  }).then(function (data) {
     res.status(200)
     res.json(data.get({plain: true}))
-  }).catch(function(error) {
+  }).catch(function (error) {
     res.status(500)
     res.json({error: error, stackError: error.stack})
   })
+}
+
+exports.search = async function (req, res) {
+  let q = req.params.q
+  let resCategory = await Post.findAll({
+    where: {
+      category: {
+        [Op.like]: `%${q}%`
+      }
+    },
+  })
+  let resAuthor = await Post.findAll({
+    where: {
+      author: {
+        [Op.like]: `%${q}%`
+      }
+    },
+  })
+  let resTitle = await Post.findAll({
+    where: {
+      title: {
+        [Op.like]: `%${q}%`
+      }
+    },
+  })
+  let result = {
+    q: q,
+    category: resCategory,
+    author: resAuthor,
+    title: resTitle,
+    totalCount: resCategory.length + resAuthor.length + resTitle.length
+  }
+  res.json(result)
 }
