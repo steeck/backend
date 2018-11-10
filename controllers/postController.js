@@ -1,5 +1,5 @@
 const steem = require('steem')
-const { Post } = require('../models')
+const { Post, Steecky } = require('../models')
 const uniqid = require('uniqid')
 const moment = require('moment')
 const { Op } = require('sequelize')
@@ -28,6 +28,23 @@ exports.getBest = function (req, res) {
   })
 }
 
+exports.getNewbie = function (req, res) {
+  Post.findAll({
+    where: {
+      reputation: {
+        [Op.lte]: 40
+      }
+    },
+    order: [
+      ['pending_payout_value', 'desc'],
+      ['id', 'desc']
+    ],
+    limit: 30
+  }).then(result => {
+    res.json(result)
+  })
+}
+
 exports.getNew = function (req, res) {
   Post.findAll({
     order: [
@@ -47,7 +64,23 @@ exports.getWeekly = function (req, res) {
       }
     },
     order: [
-      ['rate', 'desc']
+      ['id', 'desc']
+    ],
+    limit: 30
+  }).then(result => {
+    res.json(result)
+  })
+}
+
+exports.getPayout = function (req, res) {
+  Post.findAll({
+    where: {
+      created_at: {
+        [Op.lte]: moment().subtract(7, 'days').toDate()
+      }
+    },
+    order: [
+      ['id', 'desc']
     ],
     limit: 30
   }).then(result => {
@@ -87,10 +120,17 @@ exports.create = function (req, res) {
     title: req.body.title,
     thumbnail: req.body.contents[0].url,
     contents: req.body.contents,
-    json_metadata: req.body.json_metadata
+    json_metadata: req.body.json_metadata,
+    reputation: req.body.reputation
   }).then(function(data) {
-    res.status(200)
-    console.log('success', data)
+    Steecky.create({
+      username: req.body.author,
+      type: 'post',
+      poring: 100,
+      permlink: permlink
+    }).then(result => {}).catch(error => {})
+
+    res.status(201)
     res.json(data.get({plain: true}))
   }).catch(function(error) {
     res.status(500)

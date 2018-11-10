@@ -13,6 +13,7 @@ var sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, proc
   host: process.env.DB_HOST,
   dialect: process.env.DB_DIALECT,
   port: process.env.DB_PORT,
+  timezone: '+09:00',
   operatorsAliases: false,
   define: {
     underscored: true,
@@ -26,7 +27,7 @@ var sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, proc
   },
   pool: {
     max: 200,
-    min: 0,
+    min: 10,
     acquire: 20000,
     idle: 20000
   }

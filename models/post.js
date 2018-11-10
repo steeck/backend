@@ -21,7 +21,8 @@ module.exports = (sequelize, Sequelize) => {
     active_votes: Sequelize.JSON,
     net_votes: Sequelize.INTEGER,
     children: Sequelize.INTEGER,
-    pending_payout_value: Sequelize.DOUBLE
+    pending_payout_value: Sequelize.DOUBLE,
+    reputation: Sequelize.INTEGER
   }, {
     tableName: 'posts'
   })
