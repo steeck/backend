@@ -16,6 +16,22 @@ exports.getCategory = function (req, res) {
   })
 }
 
+exports.getFeed = function (req, res) {
+  // console.log(req.params.username)
+  Post.findAll({
+    where: {
+      author: {
+        [Op.in]: req.body.following
+      }
+    },
+    order: [
+      ['id', 'desc']
+    ]
+  }).then(result => {
+    res.json(result)
+  })
+}
+
 exports.getBest = function (req, res) {
   Post.findAll({
     order: [
