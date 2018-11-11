@@ -173,33 +173,117 @@ exports.delete = function (req, res) {
 
 exports.search = async function (req, res) {
   let q = req.params.q
-  let resCategory = await Post.findAll({
-    where: {
-      category: {
-        [Op.like]: `%${q}%`
+  let limit = 10
+  let page =req.body.page
+  let moreType =req.body.moreType
+  q = q.replace(/'/gi, '\\\'')
+
+  if (typeof moreType === 'undefined') {
+    let countInfo = await Post.findOne({
+      attributes:  [
+        [Post.sequelize.literal('count(if (title like \'%' + q + '%\', id , null))'), 'titleCount'],
+        [Post.sequelize.literal('count(if (category like \'%' + q + '%\', id , null))'), 'categoryCount'],
+        [Post.sequelize.literal('count(if (author like \'%' + q + '%\', id , null))'), 'authorCount']
+      ],
+      where: {
+        [Op.or] : [
+          {category: {[Op.like]: `%${q}%`}},
+          {author: {[Op.like]: `%${q}%`}},
+          {title: {[Op.like]: `%${q}%`}}
+        ]
       }
-    },
-  })
-  let resAuthor = await Post.findAll({
-    where: {
-      author: {
-        [Op.like]: `%${q}%`
-      }
-    },
-  })
-  let resTitle = await Post.findAll({
-    where: {
-      title: {
-        [Op.like]: `%${q}%`
-      }
-    },
-  })
-  let result = {
-    q: q,
-    category: resCategory,
-    author: resAuthor,
-    title: resTitle,
-    totalCount: resCategory.length + resAuthor.length + resTitle.length
+    }).catch(error => console.log(error))
+
+    let resCategory = await Post.findAll({
+      where: {
+        category: {
+          [Op.like]: `%${q}%`
+        }
+      },
+      order: [
+        ['id', 'desc']
+      ],
+      limit: limit
+    })
+    let resAuthor = await Post.findAll({
+      where: {
+        author: {
+          [Op.like]: `%${q}%`
+        }
+      },
+      order: [
+        ['id', 'desc']
+      ],
+      limit: limit
+    })
+    let resTitle = await Post.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${q}%`
+        }
+      },
+      order: [
+        ['id', 'desc']
+      ],
+      limit: limit
+    })
+    let result = {
+      q: q,
+      category: resCategory,
+      author: resAuthor,
+      title: resTitle,
+      totalCount: countInfo.dataValues.titleCount + countInfo.dataValues.categoryCount + countInfo.dataValues.authorCount,
+      pages: {
+        title: 1,
+        category: 1,
+        author: 1,
+      },
+      countInfo: countInfo
+    }
+    res.json(result)
+  } else if (typeof page === 'number') {
+    let result = []
+    switch (moreType) {
+      case 'category':
+        result = await Post.findAll({
+          where: {
+            category: {
+              [Op.like]: `%${q}%`
+            }
+          },
+          order: [
+            ['id', 'desc']
+          ],
+          offset: limit * (page - 1), limit: limit
+        })
+        break
+      case 'author':
+        result = await Post.findAll({
+          where: {
+            author: {
+              [Op.like]: `%${q}%`
+            }
+          },
+          order: [
+            ['id', 'desc']
+          ],
+          offset: limit * (page - 1), limit: limit
+        })
+        break
+      case 'title':
+        result = await Post.findAll({
+          where: {
+            title: {
+              [Op.like]: `%${q}%`
+            }
+          },
+          order: [
+            ['id', 'desc']
+          ],
+          offset: limit * (page - 1), limit: limit
+        })
+        break
+    }
+    res.json(result)
   }
-  res.json(result)
 }
