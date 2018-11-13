@@ -142,7 +142,7 @@ exports.create = function (req, res) {
     Steecky.create({
       username: req.body.author,
       type: 'post',
-      poring: 100,
+      point: 100,
       permlink: permlink
     }).then(result => {}).catch(error => {})
 
