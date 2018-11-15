@@ -1,5 +1,5 @@
 const steem = require('steem')
-const { Post, Steecky } = require('../models')
+const { Post, Steecky, Bookmark } = require('../models')
 const uniqid = require('uniqid')
 const moment = require('moment')
 const {Op} = require('sequelize')
@@ -11,6 +11,16 @@ exports.getCategory = function (req, res) {
     order: [
       ['id', 'desc']
     ]
+  }).then(result => {
+    res.json(result)
+  })
+}
+
+exports.getRandom = function (req, res) {
+  // console.log(req.params.username)
+  Post.findAll({
+    order: Post.sequelize.random(),
+    limit: 3
   }).then(result => {
     res.json(result)
   })
@@ -31,6 +41,21 @@ exports.getFeed = function (req, res) {
     res.json(result)
   })
 }
+
+exports.getAuthorPost = function (req, res) {
+  // console.log(req.params.username)
+  Post.findAll({
+    where: {
+      author: req.params.username
+    },
+    order: [
+      ['id', 'desc']
+    ]
+  }).then(result => {
+    res.json(result)
+  })
+}
+
 
 exports.getBestPending = function (req, res) {
   Post.findAll({
@@ -302,4 +327,73 @@ exports.search = async function (req, res) {
     })
     res.json(result)
   }
+}
+
+exports.getBookmarks = function (req, res) {
+  Post.hasMany(Bookmark, {foreignKey: 'post_id'})
+  Bookmark.belongsTo(Post, {foreignKey: 'post_id'})
+
+  Post.findAll({
+    include: [{
+      model: Bookmark,
+      where: {
+        username: req.params.username
+      }
+    }],
+    order: [
+      ['id', 'desc']
+    ]
+  }).then(result => {
+    res.json(result)
+  }).catch(function (error) {
+    res.status(500)
+    console.log('err', error)
+    res.json({error: error, stackError: error.stack})
+  })
+}
+
+exports.getBookmark = function (req, res) {
+  Bookmark.findAll({
+    where: {
+      username: req.params.username,
+      post_id: req.params.post_id
+    }
+  }).then(result => {
+    res.status(200)
+    res.json(result)
+  }).catch(function (error) {
+    res.status(500)
+    console.log('err', error)
+    res.json({error: error, stackError: error.stack})
+  })
+}
+
+exports.createBookmark = function (req, res) {
+  Bookmark.create({
+    username: req.body.username,
+    post_id: req.body.post_id
+  }).then(function(data) {
+    res.status(201)
+    res.json()
+  }).catch(function (error) {
+    res.status(500)
+    console.log('err', error)
+    res.json({error: error, stackError: error.stack})
+  })
+}
+
+exports.deleteBookmark = function (req, res) {
+  Bookmark.destroy({
+    where: {
+      username: req.body.username,
+      post_id: req.body.post_id
+    }
+  }).then(function(data) {
+    res.status(200)
+    res.json()
+  }).catch(function (error) {
+    res.status(500)
+    console.log('err', error)
+    res.json({error: error, stackError: error.stack})
+  })
 }

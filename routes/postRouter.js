@@ -17,5 +17,11 @@ router.post('/', postController.create);
 router.get('/search/:q', postController.search);
 router.post('/search/:q', postController.search);
 router.post('/feed', postController.getFeed);
+router.get('/bookmark/:username', postController.getBookmarks);
+router.get('/bookmark/:username/:post_id', postController.getBookmark);
+router.post('/bookmark', postController.createBookmark);
+router.post('/delbookmark', postController.deleteBookmark);
+router.get('/get/random', postController.getRandom);
+router.get('/author/:username', postController.getAuthorPost);
 
 module.exports = router;
