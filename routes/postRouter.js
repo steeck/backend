@@ -3,6 +3,10 @@ const router = express.Router();
 const postController = require('../controllers/postController');
 
 router.get('/c/:category', postController.getCategory);
+router.get('/steeck/pending', postController.getBestPending);
+router.get('/steeck/payout', postController.getBestPayout);
+router.get('/newbie/pending', postController.getNewbiePending);
+router.get('/newbie/payout', postController.getNewbiePayout);
 router.get('/best', postController.getBest);
 router.get('/new', postController.getNew);
 router.get('/newbie', postController.getNewbie);

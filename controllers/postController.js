@@ -32,6 +32,78 @@ exports.getFeed = function (req, res) {
   })
 }
 
+exports.getBestPending = function (req, res) {
+  Post.findAll({
+    where: {
+      created_at: {
+        [Op.gte]: moment().subtract(7, 'days').toDate()
+      }
+    },
+    order: [
+      ['rate', 'desc'],
+      ['id', 'desc']
+    ],
+    limit: 30
+  }).then(result => {
+    res.json(result)
+  })
+}
+exports.getBestPayout = function (req, res) {
+  Post.findAll({
+    where: {
+      created_at: {
+        [Op.lt]: moment().subtract(7, 'days').toDate()
+      }
+    },
+    order: [
+      ['rate', 'desc'],
+      ['id', 'desc']
+    ],
+    limit: 30
+  }).then(result => {
+    res.json(result)
+  })
+}
+
+exports.getNewbiePending = function (req, res) {
+  Post.findAll({
+    where: {
+      reputation: {
+        [Op.lte]: 40
+      },
+      created_at: {
+        [Op.gte]: moment().subtract(7, 'days').toDate()
+      }
+    },
+    order: [
+      ['rate', 'desc'],
+      ['id', 'desc']
+    ],
+    limit: 30
+  }).then(result => {
+    res.json(result)
+  })
+}
+exports.getNewbiePayout = function (req, res) {
+  Post.findAll({
+    where: {
+      reputation: {
+        [Op.lte]: 40
+      },
+      created_at: {
+        [Op.lt]: moment().subtract(7, 'days').toDate()
+      }
+    },
+    order: [
+      ['rate', 'desc'],
+      ['id', 'desc']
+    ],
+    limit: 30
+  }).then(result => {
+    res.json(result)
+  })
+}
+
 exports.getBest = function (req, res) {
   Post.findAll({
     order: [
