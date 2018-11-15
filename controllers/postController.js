@@ -257,7 +257,7 @@ exports.search = async function (req, res) {
       where: {
         [Op.or] : [
           {"json_metadata.tags": {[Op.like]: '%' + q + '%'}},
-          {category: {[Op.like]: `%${q}%`}},
+          // {category: {[Op.like]: `%${q}%`}},
           {author: {[Op.like]: `%${q}%`}},
           {title: {[Op.like]: `%${q}%`}}
         ]
@@ -268,7 +268,7 @@ exports.search = async function (req, res) {
       where: {
         [Op.or] : [
           {"json_metadata.tags": {[Op.like]: '%' + q + '%'}},
-          {category: {[Op.like]: `%${q}%`}},
+          // {category: {[Op.like]: `%${q}%`}},
           {author: {[Op.like]: `%${q}%`}},
           {title: {[Op.like]: `%${q}%`}}
         ]
