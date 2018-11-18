@@ -65,11 +65,11 @@ exports.create = function (req, res) {
   } else {
     let point = 0;
     if (req.body.type === 'post') {
-      point = 100;
+      point = 1000;
     } else if (req.body.type === 'comment') {
-      point = 10;
+      point = 100;
     } else if (req.body.type === 'vote') {
-      point = 20;
+      point = 200;
     }
 
     if (point) {
