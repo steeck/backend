@@ -1,5 +1,5 @@
 const steem = require('steem');
-const { Delegation, Lease, Post } = require('../models');
+const { Delegation, Lease, Post, Steecky } = require('../models');
 
 exports.list = function (req, res) {
   console.log(req.params.username);

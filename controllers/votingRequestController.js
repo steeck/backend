@@ -2,8 +2,12 @@ const steem = require('steem');
 const { VotingRequests } = require('../models');
 
 exports.list = function (req, res) {
+  var where = {}
+  if (req.params.username !== 'steeck') {
+    where = { username: req.params.username }
+  }
   VotingRequests.findAll({
-    where: { username: req.params.username },
+    where: where,
     order: [
       ['id', 'desc']
     ]

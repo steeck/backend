@@ -65,7 +65,7 @@ exports.getBestPending = function (req, res) {
       }
     },
     order: [
-      ['rate', 'desc'],
+      ['pending_payout_value', 'desc'],
       ['id', 'desc']
     ],
     limit: 30
@@ -81,7 +81,7 @@ exports.getBestPayout = function (req, res) {
       }
     },
     order: [
-      ['rate', 'desc'],
+      ['pending_payout_value', 'desc'],
       ['id', 'desc']
     ],
     limit: 30
@@ -101,7 +101,7 @@ exports.getNewbiePending = function (req, res) {
       }
     },
     order: [
-      ['rate', 'desc'],
+      ['pending_payout_value', 'desc'],
       ['id', 'desc']
     ],
     limit: 30
@@ -120,7 +120,7 @@ exports.getNewbiePayout = function (req, res) {
       }
     },
     order: [
-      ['rate', 'desc'],
+      ['pending_payout_value', 'desc'],
       ['id', 'desc']
     ],
     limit: 30
@@ -248,6 +248,18 @@ exports.create = function (req, res) {
   }).catch(function (error) {
     res.status(500)
     console.log('err', error)
+    res.json({error: error, stackError: error.stack})
+  })
+}
+
+exports.update = function (req, res) {
+  Post.update(req.body, {
+    where: {id: req.params.id}
+  }).then(function (data) {
+    res.status(200)
+    res.json()
+  }).catch(function (error) {
+    res.status(500)
     res.json({error: error, stackError: error.stack})
   })
 }
@@ -391,6 +403,24 @@ exports.deleteBookmark = function (req, res) {
   }).then(function(data) {
     res.status(200)
     res.json()
+  }).catch(function (error) {
+    res.status(500)
+    console.log('err', error)
+    res.json({error: error, stackError: error.stack})
+  })
+}
+
+exports.getPopularEditors = function (req, res) {
+  Post.findAll({
+    attributes: ['author'],
+    group: 'author',
+    order: [
+      ['reputation', 'desc']
+    ],
+    limit: 6
+  }).then(result => {
+    res.status(200)
+    res.json(result)
   }).catch(function (error) {
     res.status(500)
     console.log('err', error)

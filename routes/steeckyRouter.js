@@ -6,4 +6,6 @@ router.get('/:username', steeckyController.list);
 router.get('/daily/:username', steeckyController.daily);
 router.post('/', steeckyController.create);
 
+router.get('/center/total', steeckyController.steecky);
+
 module.exports = router;

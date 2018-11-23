@@ -3,8 +3,12 @@ const { Lease } = require('../models');
 
 exports.list = function (req, res) {
   // console.log(req.params.username);
+  var where = {}
+  if (req.params.username !== 'steeck') {
+    where = { to: req.params.username }
+  }
   Lease.findAll({
-    where: { to: req.params.username },
+    where: where,
     order: [
       ['id', 'desc']
     ]

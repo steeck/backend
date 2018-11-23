@@ -14,6 +14,7 @@ router.get('/payout', postController.getPayout);
 router.get('/weekly', postController.getWeekly);
 router.get('/:id', postController.getPost);
 router.post('/', postController.create);
+router.put('/:id', postController.update);
 router.get('/search/:q', postController.search);
 router.post('/search/:q', postController.search);
 router.post('/feed', postController.getFeed);
@@ -23,5 +24,6 @@ router.post('/bookmark', postController.createBookmark);
 router.post('/delbookmark', postController.deleteBookmark);
 router.get('/get/random', postController.getRandom);
 router.get('/author/:username', postController.getAuthorPost);
+router.get('/popular/editors', postController.getPopularEditors);
 
 module.exports = router;

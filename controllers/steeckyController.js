@@ -91,3 +91,28 @@ exports.create = function (req, res) {
     }
   }
 };
+
+
+exports.steecky = function (req, res) {
+  Steecky.findAll({
+    attributes: [
+      'username',
+      [Steecky.sequelize.literal("username, sum(point)"), 'total'],
+      [Steecky.sequelize.literal("username, sum(if(type = 'daily', point, 0))"), 'daily'],
+      [Steecky.sequelize.literal("username, sum(if(type = 'post', point, 0))"), 'post'],
+      [Steecky.sequelize.literal("username, sum(if(type = 'vote', point, 0))"), 'vote'],
+      [Steecky.sequelize.literal("username, sum(if(type = 'comment', point, 0))"), 'comment']
+    ],
+    group: 'username',
+    order: [
+      ['username', 'asc']
+    ]
+  }).then(result => {
+    res.status(200)
+    res.json(result)
+  }).catch(function (error) {
+    res.status(500)
+    console.log('err', error)
+    res.json({error: error, stackError: error.stack})
+  })
+};

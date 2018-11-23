@@ -3,8 +3,12 @@ const { Delegation } = require('../models');
 
 exports.list = function (req, res) {
   // console.log(req.params.username);
+  var where = {}
+  if (req.params.username !== 'steeck') {
+    where = { from: req.params.username }
+  }
   Delegation.findAll({
-    where: { from: req.params.username },
+    where: where,
     order: [
       ['id', 'desc']
     ]
