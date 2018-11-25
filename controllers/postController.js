@@ -273,7 +273,7 @@ exports.delete = function (req, res) {
     }
   }).then(function (data) {
     res.status(200)
-    res.json(data.get({plain: true}))
+    res.json()
   }).catch(function (error) {
     res.status(500)
     res.json({error: error, stackError: error.stack})
