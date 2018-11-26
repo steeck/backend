@@ -68,7 +68,7 @@ exports.getBestPending = function (req, res) {
       ['pending_payout_value', 'desc'],
       ['id', 'desc']
     ],
-    limit: 30
+    limit: 50
   }).then(result => {
     res.json(result)
   })
@@ -84,7 +84,7 @@ exports.getBestPayout = function (req, res) {
       ['pending_payout_value', 'desc'],
       ['id', 'desc']
     ],
-    limit: 30
+    limit: 50
   }).then(result => {
     res.json(result)
   })
@@ -104,7 +104,7 @@ exports.getNewbiePending = function (req, res) {
       ['pending_payout_value', 'desc'],
       ['id', 'desc']
     ],
-    limit: 30
+    limit: 50
   }).then(result => {
     res.json(result)
   })
@@ -123,7 +123,7 @@ exports.getNewbiePayout = function (req, res) {
       ['pending_payout_value', 'desc'],
       ['id', 'desc']
     ],
-    limit: 30
+    limit: 50
   }).then(result => {
     res.json(result)
   })
@@ -135,7 +135,7 @@ exports.getBest = function (req, res) {
       ['rate', 'desc'],
       ['id', 'desc']
     ],
-    limit: 30
+    limit: 50
   }).then(result => {
     res.json(result)
   })
@@ -152,7 +152,7 @@ exports.getNewbie = function (req, res) {
       ['pending_payout_value', 'desc'],
       ['id', 'desc']
     ],
-    limit: 30
+    limit: 50
   }).then(result => {
     res.json(result)
   })
@@ -163,7 +163,7 @@ exports.getNew = function (req, res) {
     order: [
       ['id', 'desc']
     ],
-    limit: 30
+    limit: 50
   }).then(result => {
     res.json(result)
   })
@@ -179,7 +179,7 @@ exports.getWeekly = function (req, res) {
     order: [
       ['id', 'desc']
     ],
-    limit: 30
+    limit: 50
   }).then(result => {
     res.json(result)
   })
@@ -195,7 +195,7 @@ exports.getPayout = function (req, res) {
     order: [
       ['id', 'desc']
     ],
-    limit: 30
+    limit: 50
   }).then(result => {
     res.json(result)
   })
