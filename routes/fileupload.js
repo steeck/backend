@@ -16,13 +16,16 @@ var s3 = new AWS.S3();
 
 router.route('/')
   .post(upload.single('file'), (req, res) => {
+    const ext = req.file.originalname.substr(req.file.originalname.lastIndexOf('.'));
     let filePath = req.file.path;
     console.log("fue", filePath);
     //configuring parameters
     var params = {
       Bucket: 'steeck',
+      ACL: 'public-read',
+      ContentType: req.file.mimetype,
       Body : fs.createReadStream(filePath),
-      Key : "folder/"+Date.now()+"_"+path.basename(filePath)
+      Key : "folder/"+Date.now()+"_"+path.basename(filePath)+ext
     };
 
     s3.upload(params, function (err, data) {
